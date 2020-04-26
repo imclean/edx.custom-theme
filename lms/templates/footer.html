@@ -1,0 +1,36 @@
+## mako
+<%page expression_filter="h"/>
+<%!
+  from django.urls import reverse
+  from django.utils.translation import ugettext as _
+  from branding.api import get_footer
+  from openedx.core.djangoapps.lang_pref.api import footer_language_selector_is_enabled
+%>
+<% footer = get_footer(is_secure=is_secure) %>
+<%namespace name='static' file='static_content.html'/>
+
+
+  <div class="container-fluid wrapper-footer mdb-footer">
+    <footer>
+      <div class="row">
+        <div class="col-md-9">
+          <nav class="navbar site-nav navbar-expand-sm" aria-label="${_('About')}">
+            <ul class="navbar-nav">
+              <li class="nav-item"><a class="nav-link" href="http://www.anzened.com">AnzenEd</a></li>
+            </ul>
+          </nav>
+        </div>
+        <div class="col-md-3">
+          % if not hide_openedx_link:
+            <div class="footer-about-openedx">
+              <p>
+                <a href="https://www.anzened.com" rel="noopener" target="_blank">
+                  <img src="${static.url('images/logo.png')}" width="50"/>
+                </a>
+              </p>
+            </div>
+          % endif
+        </div>
+      </div>
+    </footer>
+  </div>
